@@ -119,13 +119,13 @@
 
   $('#resetBtn').onclick=()=>{rows.innerHTML='';addRow();addRow();addRow();
     ['#unitTxt','#mPhone','#mRoom'].forEach(s=>$(s).value='');$('#unitSel').value='';$('#mName').value=state.user||'';$('#mPrio').selectedIndex=0;
-    state.images=[];renderThumbs();updSign();$('#formErr').hidden=true;document.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));};
+    state.images=[];renderThumbs();fillId();updSign();$('#formErr').hidden=true;document.querySelectorAll('.bad').forEach(x=>x.classList.remove('bad'));};
 
   $('#reqForm').addEventListener('submit',e=>{
     e.preventDefault();
     document.querySelectorAll('#reqForm .bad').forEach(x=>x.classList.remove('bad'));
     const msgs=[];
-    const need=[['#unitTxt','tên đơn vị'],['#mName','người đề nghị'],['#mPhone','số điện thoại'],['#mRoom','vị trí']];
+    const need=[['#unitTxt','tên đơn vị'],['#mName','người đề nghị'],['#mPhone','số điện thoại'],['#mRoom','vị trí'],['#mId','mã số sinh viên / cán bộ']];
     need.forEach(([s,n])=>{if(!$(s).value.trim()){$(s).classList.add('bad');msgs.push(n);}});
     if($('#mPhone').value.trim() && !/^[0-9 +().-]{8,15}$/.test($('#mPhone').value.trim())){$('#mPhone').classList.add('bad');msgs.push('số điện thoại hợp lệ');}
     const items=[...rows.children].map(tr=>[...tr.querySelectorAll('textarea')].map(t=>t.value.trim())).filter(v=>v[0]||v[1]);
